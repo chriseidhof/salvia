@@ -27,7 +27,7 @@ hCookie = fmap (fw cookies) <$> request (getM H.cookie)
 hDelCookie :: HttpM H.Response m => String -> m ()
 hDelCookie nm = response (theCookie =: Just Nothing)
   where theCookie = fmapL (pickCookie nm)
-                  . fmapL (cookies `iso` id)
+                  . fmapL (cookies % id)
                   . H.setCookie
 
 {- |
